@@ -13,7 +13,7 @@
     BASIC_AUTH_USERNAME: ${{ secrets.BASIC_AUTH_USERNAME }}
     BASIC_AUTH_PASSWORD: ${{ secrets.BASIC_AUTH_PASSWORD }}
   
-  job:
+  jobs:
     setup-build-deploy:
       name: Setup, Build, and Deploy
       runs-on: ubuntu-latest
@@ -35,7 +35,7 @@
           gcloud builds submit \
             --quiet \
             --config cloudbuild.yaml \
-            --subtitutions _BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME, _BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD, _IMAGE_TAG=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
+            --substitutions _BASIC_AUTH_USERNAME=$BASIC_AUTH_USERNAME,_BASIC_AUTH_PASSWORD=$BASIC_AUTH_PASSWORD,_IMAGE_TAG=gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA
       
       # Deploy image to Cloud Run
       - name: Deploy
